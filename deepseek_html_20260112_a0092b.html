@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fort Rollers - Professional Skaters & Urban Sports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #CF0F0F;
+            --primary-orange: #F79A19;
+            --primary-yellow: #FFE52A;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .logo-font {
+            font-family: 'Bebas Neue', cursive;
+        }
+        .skateboard-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .hero-slider {
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-red), var(--primary-orange));
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(207, 15, 15, 0.3);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(207, 15, 15, 0.4);
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Shopping Cart Styles */
+        .cart-sidebar {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+        .cart-item {
+            transition: all 0.3s ease;
+        }
+        .cart-item-remove:hover {
+            color: var(--primary-red);
+            transform: scale(1.1);
+        }
+        
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .toast-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Section spacing fix */
+        section {
+            scroll-margin-top: 120px;
+        }
+        
+        /* Floating buttons */
+        .floating-button {
+            position: fixed;
+            z-index: 100;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .floating-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Top bar styles */
+        .top-bar {
+            background: linear-gradient(90deg, #111, #222);
+            border-bottom: 1px solid #333;
+        }
+        
+        /* Hero section fix */
+        .hero-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 1s ease;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Top Bar with Locations & Social Media -->
+    <div class="top-bar py-2 hidden md:block">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <!-- Locations -->
+                <div class="flex items-center space-x-6 text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-[#F79A19] mr-2"></i>
+                        <span>123 Skate Street, Cityville</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock text-[#FFE52A] mr-2"></i>
+                        <span>Mon-Sat: 9AM-9PM, Sun: 10AM-6PM</span>
+                    </div>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-400 text-sm">Follow us:</span>
+                    <a href="https://facebook.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 w-full bg-gray-900/95 backdrop-blur-sm z-50 shadow-xl">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center">
+                    <i class="fas fa-skating text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="logo-font text-3xl text-white">FORT<span class="text-[#CF0F0F]">ROLLERS</span></h1>
+                    <p class="text-xs text-gray-300 -mt-1">Urban Sports Co.</p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white font-medium hover:text-[#FFE52A]">Home</a>
+                <a href="#about" class="nav-link text-white font-medium hover:text-[#FFE52A]">About</a>
+                <a href="#services" class="nav-link text-white font-medium hover:text-[#FFE52A]">Services</a>
+                <a href="#shop" class="nav-link text-white font-medium hover:text-[#FFE52A]">Shop</a>
+                <a href="#events" class="nav-link text-white font-medium hover:text-[#FFE52A]">Events</a>
+                <a href="#gallery" class="nav-link text-white font-medium hover:text-[#FFE52A]">Gallery</a>
+                <a href="#contact" class="nav-link text-white font-medium hover:text-[#FFE52A]">Contact</a>
+                <a href="#join" class="nav-link text-white font-medium hover:text-[#FFE52A]">Join Crew</a>
+            </div>
+
+            <!-- Call to Action Buttons & Cart -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button id="cart-toggle" class="relative p-2">
+                    <i class="fas fa-shopping-cart text-2xl text-white hover:text-[#FFE52A] transition-all"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-[#CF0F0F] text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">0</span>
+                </button>
+                <a href="#shop" class="px-4 py-2 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-full font-medium hover:shadow-lg hover:shadow-red-900/30 transition-all">Shop Now</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-gray-900 shadow-2xl p-6 md:hidden z-50">
+            <div class="flex justify-between items-center mb-10">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center">
+                        <i class="fas fa-skating text-white"></i>
+                    </div>
+                    <h2 class="logo-font text-2xl text-white">FORT<span class="text-[#CF0F0F]">ROLLERS</span></h2>
+                </div>
+                <button id="close-menu" class="text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="#home" class="text-white font-medium hover:text-[#FFE52A] text-lg">Home</a>
+                <a href="#about" class="text-white font-medium hover:text-[#FFE52A] text-lg">About</a>
+                <a href="#services" class="text-white font-medium hover:text-[#FFE52A] text-lg">Services</a>
+                <a href="#shop" class="text-white font-medium hover:text-[#FFE52A] text-lg">Shop</a>
+                <a href="#events" class="text-white font-medium hover:text-[#FFE52A] text-lg">Events</a>
+                <a href="#gallery" class="text-white font-medium hover:text-[#FFE52A] text-lg">Gallery</a>
+                <a href="#contact" class="text-white font-medium hover:text-[#FFE52A] text-lg">Contact</a>
+                <a href="#join" class="text-white font-medium hover:text-[#FFE52A] text-lg">Join Crew</a>
+                <div class="pt-6 border-t border-gray-700 flex items-center justify-between">
+                    <button id="mobile-cart-toggle" class="relative p-2">
+                        <i class="fas fa-shopping-cart text-xl text-white"></i>
+                        <span id="mobile-cart-count" class="absolute -top-1 -right-1 bg-[#CF0F0F] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    <div class="flex space-x-2">
+                        <a href="#shop" class="px-4 py-2 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-full font-medium text-sm">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Social Media -->
+            <div class="pt-6 border-t border-gray-700 mt-6">
+                <p class="text-gray-400 mb-3">Follow us:</p>
+                <div class="flex space-x-4">
+                    <a href="https://facebook.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors text-xl">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="text-gray-300 hover:text-[#CF0F0F] transition-colors text-xl">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar fixed top-0 right-0 h-full w-full md:w-96 bg-gray-900 shadow-2xl z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="logo-font text-3xl">Shopping <span class="text-[#FFE52A]">Cart</span></h2>
+                <button id="close-cart" class="text-2xl text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="mb-8">
+                <!-- Cart items will be dynamically added here -->
+                <div id="empty-cart-message" class="text-center py-12">
+                    <i class="fas fa-shopping-cart text-5xl text-gray-700 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Your cart is empty</h3>
+                    <p class="text-gray-400 mb-6">Add some awesome skate gear to get started!</p>
+                    <a href="#shop" class="inline-block px-6 py-3 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-full font-medium">Browse Shop</a>
+                </div>
+            </div>
+            
+            <div id="cart-summary" class="hidden">
+                <div class="border-t border-b border-gray-700 py-4 mb-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-400">Subtotal</span>
+                        <span id="cart-subtotal" class="font-bold">$0.00</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-400">Shipping</span>
+                        <span class="font-bold">$5.99</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold mt-4 pt-4 border-t border-gray-700">
+                        <span>Total</span>
+                        <span id="cart-total">$5.99</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <button id="whatsapp-checkout-btn" class="w-full py-4 bg-gradient-to-r from-green-600 to-green-500 rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+                        <i class="fab fa-whatsapp mr-2"></i> Checkout via WhatsApp
+                    </button>
+                    <button id="checkout-btn" class="w-full py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                        <i class="fas fa-lock mr-2"></i> Proceed to Checkout
+                    </button>
+                    <button id="continue-shopping" class="w-full py-4 border-2 border-gray-700 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="toast-notification bg-gradient-to-r from-gray-800 to-gray-900 border-l-4 border-[#FFE52A] rounded-r-lg shadow-2xl p-4 max-w-sm">
+        <div class="flex items-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-check-circle text-2xl text-[#FFE52A]"></i>
+            </div>
+            <div class="ml-3">
+                <p id="toast-message" class="font-bold">Item added to cart!</p>
+                <p class="text-sm text-gray-400">View your cart to checkout</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/254776828355?text=Hello%20Fort%20Rollers!%20I'm%20interested%20in%20your%20skating%20products%20and%20services." 
+       target="_blank"
+       class="floating-button bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-green-600 to-green-500 flex items-center justify-center text-white">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Floating Call Button -->
+    <a href="tel:+254776828355" 
+       class="floating-button bottom-28 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center text-white">
+        <i class="fas fa-phone text-xl"></i>
+    </a>
+
+    <!-- Hero Slider Section -->
+    <section id="home" class="pt-20 hero-container">
+        <!-- Background images that will slide -->
+        <div class="hero-slide-bg skateboard-bg" id="slide-bg-1"></div>
+        <div class="hero-slide-bg" id="slide-bg-2" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80'); opacity: 0;"></div>
+        
+        <div class="hero-content">
+            <div class="container mx-auto px-4 py-16 md:py-24">
+                <!-- Hero Slider -->
+                <div class="relative overflow-hidden rounded-3xl shadow-2xl mb-12">
+                    <div id="hero-slider" class="flex transition-transform duration-700">
+                        <!-- Slide 1 -->
+                        <div class="min-w-full flex flex-col md:flex-row items-center p-8 md:p-12 bg-gradient-to-r from-gray-900/90 to-gray-900/70">
+                            <div class="md:w-1/2 mb-10 md:mb-0">
+                                <h2 class="logo-font text-5xl md:text-7xl mb-4">RIDE <span class="text-[#CF0F0F]">STRONG</span>.</h2>
+                                <p class="text-xl md:text-2xl mb-8 text-gray-300">Master the streets with professional training and premium gear from Fort Rollers.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="#services" class="cta-button px-8 py-3 rounded-full font-bold text-lg">Book a Session</a>
+                                    <a href="#shop" class="px-8 py-3 border-2 border-white rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all">Shop Now</a>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                         alt="Skater performing trick" 
+                                         class="rounded-2xl shadow-2xl floating max-w-full">
+                                    <div class="absolute -bottom-4 -right-4 bg-[#FFE52A] text-gray-900 p-4 rounded-2xl shadow-xl">
+                                        <p class="font-bold">Pro Skater Gear</p>
+                                        <p class="text-sm">Shop Now!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="min-w-full flex flex-col md:flex-row items-center p-8 md:p-12 bg-gradient-to-r from-gray-900/90 to-gray-900/70">
+                            <div class="md:w-1/2 mb-10 md:mb-0">
+                                <h2 class="logo-font text-5xl md:text-7xl mb-4">SKATE <span class="text-[#F79A19]">FREE</span>.</h2>
+                                <p class="text-xl md:text-2xl mb-8 text-gray-300">Join our community of passionate skaters and experience urban sports like never before.</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="#join" class="cta-button px-8 py-3 rounded-full font-bold text-lg">Join the Crew</a>
+                                    <a href="#events" class="px-8 py-3 border-2 border-white rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all">View Events</a>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                         alt="Skater community" 
+                                         class="rounded-2xl shadow-2xl floating max-w-full">
+                                    <div class="absolute -bottom-4 -right-4 bg-[#F79A19] text-gray-900 p-4 rounded-2xl shadow-xl">
+                                        <p class="font-bold">Upcoming Events</p>
+                                        <p class="text-sm">Register Now!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slider Controls -->
+                    <button id="prev-slide" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-900/80 text-white p-3 rounded-full hover:bg-[#CF0F0F] transition-all z-10">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="next-slide" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-900/80 text-white p-3 rounded-full hover:bg-[#CF0F0F] transition-all z-10">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Slider Indicators -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+                        <button class="slide-indicator w-3 h-3 rounded-full bg-white" data-slide="0"></button>
+                        <button class="slide-indicator w-3 h-3 rounded-full bg-gray-500" data-slide="1"></button>
+                    </div>
+                </div>
+                
+                <!-- Featured Products/Service Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-red-900/30 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center mb-4">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Skate Training</h3>
+                        <p class="text-gray-300 mb-4">Beginner to advanced classes with certified coaches.</p>
+                        <a href="#services" class="text-[#FFE52A] font-medium">Learn More →</a>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-red-900/30 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-r from-[#F79A19] to-[#FFE52A] flex items-center justify-center mb-4">
+                            <i class="fas fa-shopping-cart text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Premium Gear</h3>
+                        <p class="text-gray-300 mb-4">High-quality skateboards, roller skates & safety equipment.</p>
+                        <a href="#shop" class="text-[#FFE52A] font-medium">Shop Now →</a>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-red-900/30 transition-all">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-r from-[#FFE52A] to-[#CF0F0F] flex items-center justify-center mb-4">
+                            <i class="fas fa-calendar-alt text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Skate Events</h3>
+                        <p class="text-gray-300 mb-4">Competitions, workshops & community meetups.</p>
+                        <a href="#events" class="text-[#FFE52A] font-medium">View Events →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">ABOUT <span class="text-[#CF0F0F]">FORT ROLLERS</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">We are a community-driven skating company focused on empowering skaters of all levels through quality gear, professional training, and unforgettable events.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6">Our Story & Mission</h3>
+                    <p class="text-gray-300 mb-6">Founded in 2015 by professional skaters Alex "Grind" Morgan and Jamie "Flip" Chen, Fort Rollers started as a small skate crew and grew into a leading urban sports company. Our mission is to make skating accessible, safe, and exciting for everyone.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-[#CF0F0F] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Skate Culture First</h4>
+                                <p class="text-gray-300">We celebrate the creativity and freedom of skate culture in everything we do.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-[#F79A19] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Community Driven</h4>
+                                <p class="text-gray-300">Our skaters are at the heart of every decision, event, and product we create.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-[#FFE52A] flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Quality & Safety</h4>
+                                <p class="text-gray-300">We provide only the highest quality gear that meets strict safety standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                         alt="Fort Rollers team" 
+                         class="rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] text-white p-6 rounded-2xl shadow-xl">
+                        <p class="font-bold text-2xl">2000+</p>
+                        <p class="text-lg">Skaters Trained</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">OUR <span class="text-[#F79A19]">SERVICES</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">From beginner lessons to competitive training, we offer comprehensive skating programs for all ages and skill levels.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-[#F79A19]">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-user-graduate text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4">Beginner Classes</h3>
+                    <p class="text-gray-300 text-center mb-6">Learn the basics of skating in a safe, supportive environment. Perfect for first-time skaters.</p>
+                    <div class="text-center">
+                        <span class="text-3xl font-bold text-[#FFE52A]">$25</span>
+                        <span class="text-gray-400"> / session</span>
+                    </div>
+                    <a href="#contact" class="block w-full mt-6 py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-center rounded-xl font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all">Book Now</a>
+                </div>
+                
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-[#F79A19]">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#F79A19] to-[#FFE52A] flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-trophy text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4">Advanced Training</h3>
+                    <p class="text-gray-300 text-center mb-6">Master complex tricks and techniques with our pro skater coaches. For experienced skaters.</p>
+                    <div class="text-center">
+                        <span class="text-3xl font-bold text-[#FFE52A]">$40</span>
+                        <span class="text-gray-400"> / session</span>
+                    </div>
+                    <a href="#contact" class="block w-full mt-6 py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-center rounded-xl font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all">Book Now</a>
+                </div>
+                
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-[#F79A19]">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-r from-[#FFE52A] to-[#CF0F0F] flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4">Private Lessons</h3>
+                    <p class="text-gray-300 text-center mb-6">One-on-one coaching tailored to your specific goals and skill level. Flexible scheduling.</p>
+                    <div class="text-center">
+                        <span class="text-3xl font-bold text-[#FFE52A]">$60</span>
+                        <span class="text-gray-400"> / hour</span>
+                    </div>
+                    <a href="#contact" class="block w-full mt-6 py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-center rounded-xl font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all">Book Now</a>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-full font-bold text-lg hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                    <i class="fas fa-calendar-check mr-3"></i> Request Custom Quote
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">SKATE <span class="text-[#FFE52A]">SHOP</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Premium skating gear and apparel designed for performance, safety, and style.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Product 1 -->
+                <div class="product-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1547447914-6bae2e8e8d10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Pro Skateboard" 
+                             class="product-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold">Fort Rollers Pro Deck</h3>
+                            <span class="text-[#FFE52A] font-bold text-2xl">$89</span>
+                        </div>
+                        <p class="text-gray-300 mb-4">High-performance 8.25" skateboard deck with custom grip tape.</p>
+                        <div class="flex justify-between items-center">
+                            <button class="add-to-cart px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all" data-id="1" data-name="Fort Rollers Pro Deck" data-price="89">
+                                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                            </button>
+                            <button class="buy-now-whatsapp px-4 py-2 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-lg font-medium" data-id="1" data-name="Fort Rollers Pro Deck" data-price="89">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551961463-3d6b5a5d2c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Roller Skates" 
+                             class="product-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold">Urban Roller Skates</h3>
+                            <span class="text-[#FFE52A] font-bold text-2xl">$129</span>
+                        </div>
+                        <p class="text-gray-300 mb-4">Premium quad roller skates with reinforced ankle support.</p>
+                        <div class="flex justify-between items-center">
+                            <button class="add-to-cart px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all" data-id="2" data-name="Urban Roller Skates" data-price="129">
+                                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                            </button>
+                            <button class="buy-now-whatsapp px-4 py-2 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-lg font-medium" data-id="2" data-name="Urban Roller Skates" data-price="129">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Safety Gear" 
+                             class="product-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold">Complete Safety Set</h3>
+                            <span class="text-[#FFE52A] font-bold text-2xl">$75</span>
+                        </div>
+                        <p class="text-gray-300 mb-4">Helmet, knee pads, elbow pads, and wrist guards for full protection.</p>
+                        <div class="flex justify-between items-center">
+                            <button class="add-to-cart px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all" data-id="3" data-name="Complete Safety Set" data-price="75">
+                                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                            </button>
+                            <button class="buy-now-whatsapp px-4 py-2 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-lg font-medium" data-id="3" data-name="Complete Safety Set" data-price="75">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                             alt="Skate Apparel" 
+                             class="product-image w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold">Fort Rollers Hoodie</h3>
+                            <span class="text-[#FFE52A] font-bold text-2xl">$45</span>
+                        </div>
+                        <p class="text-gray-300 mb-4">Premium cotton hoodie with the Fort Rollers logo. Unisex sizing.</p>
+                        <div class="flex justify-between items-center">
+                            <button class="add-to-cart px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all" data-id="4" data-name="Fort Rollers Hoodie" data-price="45">
+                                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                            </button>
+                            <button class="buy-now-whatsapp px-4 py-2 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-lg font-medium" data-id="4" data-name="Fort Rollers Hoodie" data-price="45">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-full font-bold text-lg hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                    <i class="fas fa-store mr-3"></i> View All Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">EVENTS & <span class="text-[#CF0F0F]">COMPETITIONS</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Join our skate events, competitions, and workshops to connect with the community and showcase your skills.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545218553-cdb549f13f8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="Skate Competition" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-[#CF0F0F] text-white px-3 py-1 rounded-full text-sm font-bold">COMPETITION</span>
+                            <span class="text-[#FFE52A] font-bold">June 15, 2023</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Street Skate Championship</h3>
+                        <p class="text-gray-300 mb-6">Annual street skate competition with cash prizes and sponsorships for top skaters.</p>
+                        <a href="#contact" class="block w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-center rounded-xl font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all">
+                            <i class="fas fa-user-check mr-2"></i> Register Now
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="Beginner Workshop" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-[#F79A19] text-gray-900 px-3 py-1 rounded-full text-sm font-bold">WORKSHOP</span>
+                            <span class="text-[#FFE52A] font-bold">June 22, 2023</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Beginner Skate Workshop</h3>
+                        <p class="text-gray-300 mb-6">Free workshop for first-time skaters. Learn basics, safety, and meet the community.</p>
+                        <a href="#contact" class="block w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-center rounded-xl font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all">
+                            <i class="fas fa-user-check mr-2"></i> RSVP Now
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="Night Skate" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-[#FFE52A] text-gray-900 px-3 py-1 rounded-full text-sm font-bold">COMMUNITY</span>
+                            <span class="text-[#FFE52A] font-bold">July 5, 2023</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">Monthly Night Skate</h3>
+                        <p class="text-gray-300 mb-6">Community night skate through the city streets. All skill levels welcome. Lights provided.</p>
+                        <a href="#contact" class="block w-full py-3 bg-gradient-to-r from-gray-700 to-gray-800 text-center rounded-xl font-medium hover:from-[#CF0F0F] hover:to-[#F79A19] transition-all">
+                            <i class="fas fa-user-check mr-2"></i> Join Event
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#events" class="inline-flex items-center px-8 py-4 border-2 border-[#FFE52A] text-[#FFE52A] rounded-full font-bold text-lg hover:bg-[#FFE52A] hover:text-gray-900 transition-all">
+                    <i class="fas fa-calendar-alt mr-3"></i> View All Events
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">SKATE <span class="text-[#FFE52A]">GALLERY</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Action shots, event highlights, and the vibrant culture of Fort Rollers.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+                <div class="overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1547447914-6bae2e8e8d10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Skate Action 1" 
+                         class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Skate Action 2" 
+                         class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Skate Action 3" 
+                         class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="overflow-hidden rounded-xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551961463-3d6b5a5d2c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Skate Action 4" 
+                         class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="https://instagram.com" target="_blank" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-full font-bold text-lg hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                    <i class="fab fa-instagram mr-3"></i> Follow @fortrollers
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">SKATER <span class="text-[#CF0F0F]">TESTIMONIALS</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Hear from our community of skaters who have trained, shopped, and skated with us.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center mr-4">
+                            <span class="text-white font-bold text-xl">M</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">Mike "Grind" Rodriguez</h4>
+                            <p class="text-gray-400">Pro Skater</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"Fort Rollers changed my skating game. Their training program helped me land my first 540 flip, and their gear is top-notch. This is more than a brand - it's a family."</p>
+                    <div class="flex mt-4 text-[#FFE52A]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-r from-[#F79A19] to-[#FFE52A] flex items-center justify-center mr-4">
+                            <span class="text-gray-900 font-bold text-xl">S</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">Sarah Chen</h4>
+                            <p class="text-gray-400">Beginner Skater</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"As a complete beginner, I was nervous to start skating. Fort Rollers' beginner classes made me feel safe and supported. Now I skate every weekend with the crew!"</p>
+                    <div class="flex mt-4 text-[#FFE52A]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-r from-[#FFE52A] to-[#CF0F0F] flex items-center justify-center mr-4">
+                            <span class="text-gray-900 font-bold text-xl">J</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl">Jamal "Flip" Wilson</h4>
+                            <p class="text-gray-400">Competitive Skater</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">"The Fort Rollers competitions are the best in the city. Well-organized, great prizes, and an amazing community vibe. I've met my best skating friends here."</p>
+                    <div class="flex mt-4 text-[#FFE52A]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="logo-font text-5xl md:text-6xl mb-4">CONTACT <span class="text-[#FFE52A]">FORT ROLLERS</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Have questions? Want to book a session or inquire about products? Get in touch with our team.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-3xl font-bold mb-8">Send us a Message</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:border-[#FFE52A]" placeholder="Enter your name" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                                <input type="email" id="email" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:border-[#FFE52A]" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:border-[#FFE52A]" placeholder="What is this regarding?" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:border-[#FFE52A]" placeholder="Type your message here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div>
+                    <h3 class="text-3xl font-bold mb-8">Get in Touch</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center mr-6">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">Visit Our Skate Park</h4>
+                                <p class="text-gray-300">123 Skate Street<br>Urban District<br>Cityville, CV 10101</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#F79A19] to-[#FFE52A] flex items-center justify-center mr-6">
+                                <i class="fas fa-phone-alt text-gray-900 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">Call Us</h4>
+                                <p class="text-gray-300">Phone: <a href="tel:+254776828355" class="text-[#FFE52A] hover:underline">+254 776 828 355</a><br>WhatsApp: <a href="https://wa.me/254776828355" target="_blank" class="text-[#FFE52A] hover:underline">+254 776 828 355</a><br>Hours: Mon-Sat 10AM-8PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#FFE52A] to-[#CF0F0F] flex items-center justify-center mr-6">
+                                <i class="fas fa-envelope text-gray-900 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">Email Us</h4>
+                                <p class="text-gray-300">info@fortrollers.com<br>support@fortrollers.com<br>events@fortrollers.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Contact Buttons -->
+                    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="https://wa.me/254776828355?text=Hello%20Fort%20Rollers!%20I%20have%20a%20question%20about%20your%20services." 
+                           target="_blank"
+                           class="flex items-center justify-center py-4 bg-gradient-to-r from-green-600 to-green-500 rounded-xl font-bold text-lg hover:shadow-xl transition-all">
+                            <i class="fab fa-whatsapp mr-3 text-xl"></i> WhatsApp Us
+                        </a>
+                        <a href="tel:+254776828355" 
+                           class="flex items-center justify-center py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                            <i class="fas fa-phone mr-3"></i> Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Crew Section -->
+    <section id="join" class="py-16 bg-gradient-to-r from-gray-900 to-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="logo-font text-5xl md:text-6xl mb-6">JOIN THE <span class="text-[#FFE52A]">CREW</span></h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-10">Become part of the Fort Rollers family. Get exclusive access to events, discounts, and our skating community.</p>
+            
+            <div class="max-w-2xl mx-auto bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl">
+                <h3 class="text-2xl font-bold mb-6">Sign Up for Membership</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="text-left p-4 bg-gray-900/50 rounded-xl">
+                        <h4 class="font-bold text-lg mb-2 text-[#FFE52A]">Free Membership</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-[#CF0F0F] mr-2"></i> Event Notifications</li>
+                            <li class="flex items-center"><i class="fas fa-check text-[#CF0F0F] mr-2"></i> Newsletter</li>
+                            <li class="flex items-center"><i class="fas fa-check text-[#CF0F0F] mr-2"></i> Community Forum Access</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-left p-4 bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl border border-[#F79A19]">
+                        <h4 class="font-bold text-lg mb-2 text-[#F79A19]">Pro Membership</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-check text-[#FFE52A] mr-2"></i> All Free Benefits</li>
+                            <li class="flex items-center"><i class="fas fa-check text-[#FFE52A] mr-2"></i> 15% Discount on Gear</li>
+                            <li class="flex items-center"><i class="fas fa-check text-[#FFE52A] mr-2"></i> Early Event Registration</li>
+                            <li class="flex items-center"><i class="fas fa-check text-[#FFE52A] mr-2"></i> Free Workshop Entry</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <input type="email" id="newsletter-email" placeholder="Enter your email" class="flex-grow max-w-md p-4 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:border-[#FFE52A]">
+                    <button id="newsletter-submit" class="px-8 py-4 bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] rounded-xl font-bold hover:shadow-xl hover:shadow-red-900/30 transition-all">
+                        Join Now
+                    </button>
+                </div>
+                
+                <p class="text-gray-400 text-sm mt-4">By joining, you agree to our terms and consent to receive Fort Rollers updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 pt-12 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center">
+                            <i class="fas fa-skating text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="logo-font text-2xl text-white">FORT<span class="text-[#CF0F0F]">ROLLERS</span></h2>
+                            <p class="text-xs text-gray-300 -mt-1">Urban Sports Co.</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">Ride Strong. Skate Free. Fort Rollers is your destination for premium skating gear, professional training, and an unforgettable skate community.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#CF0F0F] transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#CF0F0F] transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#CF0F0F] transition-all">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#CF0F0F] transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-[#FFE52A] transition-all">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-[#FFE52A] transition-all">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-[#FFE52A] transition-all">Services</a></li>
+                        <li><a href="#shop" class="text-gray-400 hover:text-[#FFE52A] transition-all">Shop</a></li>
+                        <li><a href="#events" class="text-gray-400 hover:text-[#FFE52A] transition-all">Events</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Shop Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#shop" class="text-gray-400 hover:text-[#FFE52A] transition-all">Skateboards</a></li>
+                        <li><a href="#shop" class="text-gray-400 hover:text-[#FFE52A] transition-all">Roller Skates</a></li>
+                        <li><a href="#shop" class="text-gray-400 hover:text-[#FFE52A] transition-all">Protective Gear</a></li>
+                        <li><a href="#shop" class="text-gray-400 hover:text-[#FFE52A] transition-all">Apparel</a></li>
+                        <li><a href="#shop" class="text-gray-400 hover:text-[#FFE52A] transition-all">Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contact Info</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-[#F79A19] mr-3 mt-1"></i>
+                            <span>123 Skate Street, Cityville CV 10101</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-[#F79A19] mr-3"></i>
+                            <a href="tel:+254776828355" class="hover:text-[#FFE52A]">+254 776 828 355</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-[#F79A19] mr-3"></i>
+                            <span>info@fortrollers.com</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- WhatsApp Button -->
+                    <div class="mt-8">
+                        <a href="https://wa.me/254776828355" target="_blank" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-500 rounded-full font-medium hover:shadow-lg transition-all">
+                            <i class="fab fa-whatsapp mr-3 text-xl"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">&copy; 2023 Fort Rollers - Professional Skaters & Urban Sports Company. All rights reserved.</p>
+                <p class="text-gray-600 text-sm mt-2">Designed with passion for skate culture.</p>
+            </div>
+        </div>
+        
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="fixed bottom-6 right-24 w-12 h-12 rounded-full bg-gradient-to-r from-[#CF0F0F] to-[#F79A19] flex items-center justify-center text-white shadow-xl hover:shadow-2xl transition-all opacity-0 z-40">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+    <script>
+        // Shopping Cart State
+        let cart = [];
+        const SHIPPING_COST = 5.99;
+        const WHATSAPP_NUMBER = "254776828355";
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+        
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.remove('open');
+            }
+        });
+        
+        // Shopping Cart Functions
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('mobile-cart-count').textContent = totalItems;
+        }
+        
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartSummary = document.getElementById('cart-summary');
+            
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                cartSummary.classList.add('hidden');
+                cartItemsContainer.innerHTML = '';
+                cartItemsContainer.appendChild(emptyCartMessage);
+                return;
+            }
+            
+            emptyCartMessage.classList.add('hidden');
+            cartSummary.classList.remove('hidden');
+            
+            // Clear current items
+            cartItemsContainer.innerHTML = '';
+            
+            // Calculate totals
+            let subtotal = 0;
+            
+            // Add each cart item
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item bg-gray-800 rounded-xl p-4 mb-4';
+                cartItemElement.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-bold">${item.name}</h4>
+                        <button class="cart-item-remove text-gray-400 hover:text-red-500 transition-all" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <button class="quantity-decrease w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center" data-index="${index}">-</button>
+                                <span class="font-bold">${item.quantity}</span>
+                                <button class="quantity-increase w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center" data-index="${index}">+</button>
+                            </div>
+                            <span class="text-gray-400 text-sm">$${item.price} each</span>
+                        </div>
+                        <span class="font-bold text-[#FFE52A]">$${itemTotal.toFixed(2)}</span>
+                    </div>
+                `;
+                
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            // Update totals
+            const total = subtotal + SHIPPING_COST;
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+            
+            // Add event listeners to new cart item buttons
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeFromCart(index);
+                });
+            });
+            
+            document.querySelectorAll('.quantity-decrease').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateQuantity(index, cart[index].quantity - 1);
+                });
+            });
+            
+            document.querySelectorAll('.quantity-increase').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateQuantity(index, cart[index].quantity + 1);
+                });
+            });
+        }
+        
+        function addToCart(productId, productName, productPrice, quantity = 1) {
+            // Check if item already in cart
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+            
+            if (existingItemIndex >= 0) {
+                // Update quantity if already in cart
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Add new item to cart
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    quantity: quantity
+                });
+            }
+            
+            // Update cart display
+            updateCartCount();
+            updateCartDisplay();
+            
+            // Show notification
+            showToast(`${productName} added to cart!`);
+        }
+        
+        function removeFromCart(index) {
+            if (index >= 0 && index < cart.length) {
+                const removedItem = cart[index];
+                cart.splice(index, 1);
+                updateCartCount();
+                updateCartDisplay();
+                showToast(`${removedItem.name} removed from cart`);
+            }
+        }
+        
+        function updateQuantity(index, newQuantity) {
+            if (index >= 0 && index < cart.length) {
+                if (newQuantity <= 0) {
+                    removeFromCart(index);
+                } else {
+                    cart[index].quantity = newQuantity;
+                    updateCartCount();
+                    updateCartDisplay();
+                }
+            }
+        }
+        
+        // WhatsApp Functions
+        function sendWhatsAppMessage(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        function sendOrderViaWhatsApp() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+            
+            let message = `Hello Fort Rollers! I would like to place an order:\n\n`;
+            
+            // Add cart items to message
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                message += `${index + 1}. ${item.name} x${item.quantity} - $${itemTotal.toFixed(2)}\n`;
+            });
+            
+            // Calculate totals
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const total = subtotal + SHIPPING_COST;
+            
+            message += `\nSubtotal: $${subtotal.toFixed(2)}`;
+            message += `\nShipping: $${SHIPPING_COST.toFixed(2)}`;
+            message += `\nTotal: $${total.toFixed(2)}`;
+            message += `\n\nPlease contact me to complete the order.`;
+            
+            sendWhatsAppMessage(message);
+            showToast('Opening WhatsApp to send order...');
+        }
+        
+        function sendSingleProductViaWhatsApp(productName, productPrice) {
+            const message = `Hello Fort Rollers! I'm interested in purchasing:\n\nProduct: ${productName}\nPrice: $${productPrice}\n\nPlease provide more details about this product and how to purchase.`;
+            sendWhatsAppMessage(message);
+            showToast('Opening WhatsApp to inquire about product...');
+        }
+        
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Cart Toggle
+        const cartToggle = document.getElementById('cart-toggle');
+        const mobileCartToggle = document.getElementById('mobile-cart-toggle');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const continueShopping = document.getElementById('continue-shopping');
+        
+        cartToggle.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+        });
+        
+        mobileCartToggle.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+            mobileMenu.classList.remove('open');
+        });
+        
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+        
+        continueShopping.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+        
+        // Close cart when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!cartSidebar.contains(e.target) && 
+                !cartToggle.contains(e.target) && 
+                !mobileCartToggle.contains(e.target)) {
+                cartSidebar.classList.remove('open');
+            }
+        });
+        
+        // Add to Cart Buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                const productName = this.getAttribute('data-name');
+                const productPrice = this.getAttribute('data-price');
+                
+                addToCart(productId, productName, productPrice, 1);
+                
+                // Visual feedback on button
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check mr-2"></i> Added';
+                this.classList.remove('from-gray-700', 'to-gray-800', 'hover:from-[#CF0F0F]', 'hover:to-[#F79A19]');
+                this.classList.add('from-green-600', 'to-green-500');
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    this.classList.remove('from-green-600', 'to-green-500');
+                    this.classList.add('from-gray-700', 'to-gray-800', 'hover:from-[#CF0F0F]', 'hover:to-[#F79A19]');
+                }, 1500);
+            });
+        });
+        
+        // Buy Now Buttons (WhatsApp)
+        document.querySelectorAll('.buy-now-whatsapp').forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-name');
+                const productPrice = this.getAttribute('data-price');
+                
+                // Send product to WhatsApp
+                sendSingleProductViaWhatsApp(productName, productPrice);
+            });
+        });
+        
+        // WhatsApp Checkout Button
+        document.getElementById('whatsapp-checkout-btn').addEventListener('click', function() {
+            sendOrderViaWhatsApp();
+            cartSidebar.classList.remove('open');
+        });
+        
+        // Regular Checkout Button
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+            
+            // In a real app, this would redirect to checkout
+            showToast('Proceeding to checkout... (Demo)');
+            console.log('Checkout with items:', cart);
+            
+            // Simulate checkout process
+            setTimeout(() => {
+                showToast('Order placed successfully!');
+                cart = [];
+                updateCartCount();
+                updateCartDisplay();
+                cartSidebar.classList.remove('open');
+            }, 1000);
+        });
+        
+        // Hero Slider with Background Images
+        const heroSlider = document.getElementById('hero-slider');
+        const prevSlideButton = document.getElementById('prev-slide');
+        const nextSlideButton = document.getElementById('next-slide');
+        const slideIndicators = document.querySelectorAll('.slide-indicator');
+        const slideBg1 = document.getElementById('slide-bg-1');
+        const slideBg2 = document.getElementById('slide-bg-2');
+        
+        let currentSlide = 0;
+        const totalSlides = 2;
+        
+        function updateSlider() {
+            heroSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update background images
+            if (currentSlide === 0) {
+                slideBg1.style.opacity = '1';
+                slideBg2.style.opacity = '0';
+            } else {
+                slideBg1.style.opacity = '0';
+                slideBg2.style.opacity = '1';
+            }
+            
+            // Update indicators
+            slideIndicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.remove('bg-gray-500');
+                    indicator.classList.add('bg-white');
+                } else {
+                    indicator.classList.remove('bg-white');
+                    indicator.classList.add('bg-gray-500');
+                }
+            });
+        }
+        
+        nextSlideButton.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+        
+        prevSlideButton.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+        
+        // Auto slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+        
+        // Add click events to indicators
+        slideIndicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                showToast('Please fill in all required fields.');
+                return;
+            }
+            
+            // Create WhatsApp message for contact form
+            const whatsappMessage = `New Contact Form Submission from Fort Rollers Website:\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}\n\nPlease respond to this inquiry.`;
+            
+            // Send to WhatsApp
+            sendWhatsAppMessage(whatsappMessage);
+            
+            // Show success message
+            showToast('Message sent successfully via WhatsApp!');
+            contactForm.reset();
+        });
+        
+        // Newsletter Subscription
+        document.getElementById('newsletter-submit').addEventListener('click', function() {
+            const email = document.getElementById('newsletter-email').value;
+            
+            if (!email || !email.includes('@')) {
+                showToast('Please enter a valid email address.');
+                return;
+            }
+            
+            const message = `New Newsletter Subscription:\n\nEmail: ${email}\n\nPlease add this email to the Fort Rollers newsletter list.`;
+            sendWhatsAppMessage(message);
+            
+            showToast('Thank you for joining! Check WhatsApp for confirmation.');
+            document.getElementById('newsletter-email').value = '';
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('opacity-0');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.remove('opacity-100');
+                backToTopButton.classList.add('opacity-0');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links - FIXED VERSION
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                e.preventDefault();
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calculate position considering fixed header
+                    const headerOffset = 120;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+        
+        // Initialize ScrollReveal animations
+        if (typeof ScrollReveal !== 'undefined') {
+            ScrollReveal().reveal('.product-card, .testimonial-card', {
+                delay: 200,
+                distance: '20px',
+                origin: 'bottom',
+                interval: 100
+            });
+            
+            ScrollReveal().reveal('section > div', {
+                delay: 100,
+                distance: '30px',
+                origin: 'bottom'
+            });
+        }
+        
+        // Initialize cart display
+        updateCartDisplay();
+        
+        // Make all external links open in new tab
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            if (!link.hasAttribute('target')) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+    </script>
+</body>
+</html>
