@@ -21,8 +21,8 @@
 
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Poppins modern sports style -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    <!-- Google Fonts: Manrope modern sports style -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Favicon -->
@@ -34,7 +34,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Manrope', sans-serif;
         }
 
         :root {
@@ -325,13 +325,13 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         /* ---------- FOOTER ---------- */
         .footer {
-            background: var(--primary-navy);
-            color: var(--white);
-            padding: 3rem 0 1rem;
+            background: #ffffff;
+            color: #1b2545;
+            padding: 3.2rem 0 1.2rem;
             margin-top: 4rem;
+            border-top: 4px solid #c96829;
         }
 
         .footer-content {
@@ -342,19 +342,21 @@
         }
 
         .footer-section h3 {
-            color: var(--white);
+            color: #0f1735;
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.12rem;
+            font-weight: 800;
         }
 
         .footer-section p,
         .footer-section a {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
+            color: #53607a;
+            line-height: 1.75;
+            font-size: 0.96rem;
         }
 
         .footer-section a:hover {
-            color: var(--accent-blue);
+            color: #c96829;
         }
 
         .social-links {
@@ -364,9 +366,10 @@
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 38px;
+            height: 38px;
+            background: #f5e8de;
+            color: #c96829;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -375,17 +378,22 @@
         }
 
         .social-links a:hover {
-            background: var(--accent-blue);
+            background: #c96829;
+            color: #ffffff;
             transform: translateY(-2px);
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid #e6ebf2;
             padding-top: 1rem;
             text-align: center;
-            color: rgba(255, 255, 255, 0.6);
+            color: #6e7c97;
+            font-size: 0.92rem;
         }
 
+        .footer-bottom p {
+            margin: 0;
+        }
         /* ---------- RESPONSIVE DESIGN ---------- */
         @media (max-width: 768px) {
             .nav-links {
@@ -404,35 +412,396 @@
                 gap: 2rem;
             }
         }
+
+        /* ---------- NAVBAR UNIFORM ---------- */
+        .navbar {
+            padding: 0;
+            background: var(--white);
+            backdrop-filter: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            min-height: 76px;
+            align-items: center;
+            gap: 1.4rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: inherit;
+            font-weight: inherit;
+            color: inherit;
+        }
+
+        .logo .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-navy);
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.05;
+        }
+
+        .logo .logo-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+        }
+
+        .logo .logo-sub {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #64748b;
+            margin-top: 0.1rem;
+        }
+
+        .nav-links {
+            margin: 0 auto;
+            padding: 0;
+            gap: 1.7rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .nav-cart {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #edf2fa;
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .nav-cart:hover {
+            background: #dce7f7;
+            color: var(--accent-blue);
+        }
+
+        .nav-cart-count {
+            position: absolute;
+            top: -5px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-navy);
+            color: var(--white);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.72rem 1.55rem;
+            border-radius: 999px;
+            background: var(--primary-navy);
+            color: var(--white);
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 992px) {
+            .logo .logo-title {
+                font-size: 1.2rem;
+            }
+
+            .logo .logo-sub {
+                font-size: 0.72rem;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                margin-left: auto;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.95rem;
+                padding: 1rem 2rem 1.3rem;
+                box-shadow: var(--shadow-sm);
+                border-top: 1px solid #e4ebf5;
+                z-index: 1201;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+        }
+        /* ---------- ORANGE NAV STRUCTURE ---------- */
+        :root {
+            --navbar-offset: 122px;
+        }
+
+        .navbar {
+            background: #f3f4f7 !important;
+            backdrop-filter: none !important;
+            box-shadow: none !important;
+            padding: 0.55rem 0 0 !important;
+            z-index: 1300;
+        }
+
+        .navbar .logo,
+        .navbar .nav-actions {
+            display: none !important;
+        }
+
+        .nav-top-inner {
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .nav-brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #c96829;
+            border: 1px solid #efc3a3;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.02;
+        }
+
+        .nav-brand-title {
+            font-size: clamp(1.05rem, 2vw, 1.95rem);
+            font-weight: 800;
+            color: #d35d17;
+        }
+
+        .nav-brand-sub {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #667085;
+        }
+
+        .nav-touch-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.63rem 1.5rem;
+            border: 1px solid #d35d17;
+            border-radius: 4px;
+            background: transparent;
+            color: #d35d17;
+            font-weight: 600;
+        }
+
+        .nav-main {
+            padding: 0.35rem 0;
+        }
+
+        .nav-main-inner {
+            position: relative;
+            min-height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #c96829;
+            padding: 0 1.1rem;
+        }
+
+        .nav-container {
+            min-height: 0 !important;
+            padding: 0 2rem !important;
+            position: static !important;
+        }
+
+        .nav-links {
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem !important;
+        }
+
+        .nav-links a {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.38rem;
+        }
+
+        .nav-links a i {
+            font-size: 0.66rem;
+            line-height: 1;
+            opacity: 0.95;
+        }
+
+        .nav-links a::after {
+            background: #0d264a !important;
+            bottom: -6px !important;
+            height: 2px !important;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ffffff !important;
+        }
+
+        .mobile-menu-btn {
+            color: #ffffff !important;
+            display: none;
+        }
+
+        @media (max-width: 992px) {
+            .nav-top-inner {
+                min-height: 50px;
+            }
+
+            .nav-brand-title {
+                font-size: 1.1rem;
+            }
+
+            .nav-brand-sub {
+                display: none;
+            }
+
+            .nav-touch-btn {
+                padding: 0.45rem 0.95rem;
+                font-size: 0.84rem;
+            }
+
+            .nav-main-inner {
+                justify-content: space-between;
+                min-height: 44px;
+            }
+
+            .mobile-menu-btn {
+                display: block !important;
+                margin-left: auto;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: #c96829 !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: none !important;
+                padding: 0.85rem 1rem 1rem !important;
+                gap: 0.9rem !important;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-links a::after {
+                display: none !important;
+            }
+        }
+
+        .hero-section {
+            margin-top: var(--navbar-offset) !important;
+        }
     </style>
 </head>
 
 <body>
     <!-- STICKY NAVBAR -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-skating"></i>
-                Edge Skating Club
+        <div class="nav-top">
+            <div class="container nav-top-inner">
+                <a href="index.html" class="nav-brand">
+                    <span class="nav-brand-icon"><i class="fas fa-cog"></i></span>
+                    <span class="nav-brand-text">
+                        <span class="nav-brand-title">fortroller Skating Club</span>
+                        <span class="nav-brand-sub">Urban Sports Co.</span>
+                    </span>
+                </a>
+                <a href="contact.html" class="nav-touch-btn">Get in touch</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+        </div>
+        <div class="nav-main">
+            <div class="container nav-main-inner">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html" class="active">Our Work <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="events.html">Opportunities <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="blogs.html">Blog Posts</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero-section"
-        style="background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 100%); color: white; padding: 120px 0 80px; text-align: center; margin-top: 80px;">
+        style="background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 100%); color: white; padding: 120px 0 80px; text-align: center; margin-top: var(--navbar-offset);">
         <div class="container">
             <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">Our Gallery</h1>
             <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">Capturing the moments, skills,
@@ -637,16 +1006,36 @@
         // Mobile menu toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function () {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'white';
-            navLinks.style.padding = '1rem';
-            navLinks.style.boxShadow = 'var(--shadow-sm)';
+            navLinks.classList.toggle('show');
         });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelector('.nav-links').classList.remove('show');
+            });
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 992) {
+                document.querySelector('.nav-links').classList.remove('show');
+            }
+        });
+
+        function syncNavCartCount() {
+            const badge = document.querySelector('.nav-cart-count');
+            if (!badge) return;
+            try {
+                const cart = JSON.parse(localStorage.getItem('edgeSkateCart') || '[]');
+                const count = Array.isArray(cart)
+                    ? cart.reduce((total, item) => total + Number(item.quantity || 0), 0)
+                    : 0;
+                badge.textContent = String(count);
+            } catch (error) {
+                badge.textContent = '0';
+            }
+        }
+
+        syncNavCartCount();
 
         // Gallery lightbox functionality (simple)
         document.querySelectorAll('.gallery-item').forEach(item => {
@@ -702,3 +1091,11 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+

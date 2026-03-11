@@ -20,8 +20,8 @@
 
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Poppins modern sports style -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    <!-- Google Fonts: Manrope modern sports style -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Favicon -->
@@ -35,23 +35,31 @@
 <body>
     <!-- STICKY NAVBAR -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-skating"></i>
-                Edge Skating Club
+        <div class="nav-top">
+            <div class="container nav-top-inner">
+                <a href="index.html" class="nav-brand">
+                    <span class="nav-brand-icon"><i class="fas fa-cog"></i></span>
+                    <span class="nav-brand-text">
+                        <span class="nav-brand-title">fortroller Skating Club</span>
+                        <span class="nav-brand-sub">Urban Sports Co.</span>
+                    </span>
+                </a>
+                <a href="contact.html" class="nav-touch-btn">Get in touch</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="team.html" class="active">Team</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+        </div>
+        <div class="nav-main">
+            <div class="container nav-main-inner">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Our Work <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="events.html">Opportunities <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="team.html" class="active">Team</a></li>
+                    <li><a href="blogs.html">Blog Posts</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -148,6 +156,59 @@
         </div>
     </section>
 
+    <section class="coach-pillars-section reveal">
+        <div class="container">
+            <h2 class="section-title">How We Coach Skaters</h2>
+            <div class="pillars-grid">
+                <article class="pillar-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safety First</h3>
+                    <p>Every session starts with protection checks, warmups, and controlled drills to build confidence
+                        safely.</p>
+                </article>
+                <article class="pillar-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Progressive Learning</h3>
+                    <p>We break down skills into clear levels so each skater improves with structure and measurable
+                        milestones.</p>
+                </article>
+                <article class="pillar-card">
+                    <i class="fas fa-stopwatch"></i>
+                    <h3>Performance Training</h3>
+                    <p>Advanced athletes train speed, balance, and race tactics with targeted routines and feedback.</p>
+                </article>
+                <article class="pillar-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Community Support</h3>
+                    <p>Our culture keeps skaters motivated through peer support, events, and coach mentorship.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-pathway-section reveal">
+        <div class="container">
+            <h2 class="section-title">Athlete Development Pathway</h2>
+            <div class="pathway-grid">
+                <article class="pathway-card">
+                    <span class="pathway-step">1</span>
+                    <h3>Starter Level</h3>
+                    <p>4 to 6 weeks focused on stance, stopping, turning, and skating balance basics.</p>
+                </article>
+                <article class="pathway-card">
+                    <span class="pathway-step">2</span>
+                    <h3>Skill Builder</h3>
+                    <p>8 to 12 weeks of edge control, endurance laps, and controlled crossover techniques.</p>
+                </article>
+                <article class="pathway-card">
+                    <span class="pathway-step">3</span>
+                    <h3>Competitive Track</h3>
+                    <p>Race starts, pace strategy, sprint intervals, and event preparation for club competitions.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
@@ -196,5 +257,7 @@
 </body>
 
 </html>
+
+
 
 

@@ -32,19 +32,22 @@ function initRevealAnimations() {
 // Mobile menu toggle
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    if (mobileMenuBtn) {
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', function () {
-            const navLinks = document.querySelector('.nav-links');
-            if (navLinks) {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.right = '0';
-                navLinks.style.background = 'white';
-                navLinks.style.padding = '1rem';
-                navLinks.style.boxShadow = 'var(--shadow-sm)';
+            navLinks.classList.toggle('show');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.classList.remove('show');
+            });
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 992) {
+                navLinks.classList.remove('show');
             }
         });
     }
@@ -59,6 +62,108 @@ function initWhatsAppAnimation() {
             setTimeout(() => whatsappBtn.classList.remove('whatsapp-pulse'), 2000);
         }, 10000);
     }
+}
+
+// Sync nav cart badges with saved cart
+function initNavCartCount() {
+    const badges = document.querySelectorAll('.nav-cart-count, .home-makai-nav-cart-count');
+    if (!badges.length) return;
+
+    let cart = [];
+    try {
+        const parsed = JSON.parse(localStorage.getItem('edgeSkateCart') || '[]');
+        cart = Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        cart = [];
+    }
+
+    const count = cart.reduce((total, item) => total + Number(item.quantity || 0), 0);
+    badges.forEach(badge => {
+        badge.textContent = String(count);
+    });
+}
+
+// Counter animation for stat numbers
+function initStatCounters() {
+    const counters = document.querySelectorAll('.count-up');
+    if (!counters.length) return;
+
+    const animateCounter = (element) => {
+        const target = Number(element.dataset.target || 0);
+        const suffix = element.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+
+        function step(timestamp) {
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.floor(target * eased);
+            element.textContent = `${value}${suffix}`;
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                element.textContent = `${target}${suffix}`;
+            }
+        }
+
+        requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.45 });
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// FAQ accordion
+function initFaqAccordion() {
+    const toggles = document.querySelectorAll('.faq-toggle');
+    if (!toggles.length) return;
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', function () {
+            const currentItem = this.closest('.faq-item');
+            const wasOpen = currentItem.classList.contains('open');
+
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+                const button = item.querySelector('.faq-toggle');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
+
+            if (!wasOpen) {
+                currentItem.classList.add('open');
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+}
+
+// Back-to-top button
+function initBackToTopButton() {
+    if (document.querySelector('.back-to-top')) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'back-to-top';
+    button.setAttribute('aria-label', 'Back to top');
+    button.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    document.body.appendChild(button);
+
+    window.addEventListener('scroll', function () {
+        button.classList.toggle('show', window.scrollY > 420);
+    });
+
+    button.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
 
 // ========== HERO SLIDER (INDEX.HTML) ==========
@@ -445,6 +550,10 @@ document.addEventListener('DOMContentLoaded', function () {
     initRevealAnimations();
     initMobileMenu();
     initWhatsAppAnimation();
+    initNavCartCount();
+    initStatCounters();
+    initFaqAccordion();
+    initBackToTopButton();
 
     // Page-specific functionality
     initHeroSlider();

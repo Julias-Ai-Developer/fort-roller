@@ -21,8 +21,8 @@
 
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Poppins modern sports style -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    <!-- Google Fonts: Manrope modern sports style -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Favicon -->
@@ -36,23 +36,31 @@
 <body>
     <!-- STICKY NAVBAR -->
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-skating"></i>
-                Edge Skating Club
+        <div class="nav-top">
+            <div class="container nav-top-inner">
+                <a href="index.html" class="nav-brand">
+                    <span class="nav-brand-icon"><i class="fas fa-cog"></i></span>
+                    <span class="nav-brand-text">
+                        <span class="nav-brand-title">fortroller Skating Club</span>
+                        <span class="nav-brand-sub">Urban Sports Co.</span>
+                    </span>
+                </a>
+                <a href="contact.html" class="nav-touch-btn">Get in touch</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html" class="active">Shop</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+        </div>
+        <div class="nav-main">
+            <div class="container nav-main-inner">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html" class="active">Our Work <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="events.html">Opportunities <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="blogs.html">Blog Posts</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -70,6 +78,21 @@
                     <button class="filter-btn" data-filter="wheels">Wheels</button>
                     <button class="filter-btn" data-filter="accessories">Accessories</button>
                 </div>
+                <div class="shop-tools">
+                    <div class="shop-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="shopSearch" placeholder="Search skates, helmets, wheels...">
+                    </div>
+                    <div class="shop-sort-wrap">
+                        <label for="shopSort">Sort By</label>
+                        <select id="shopSort">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name-asc">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
 
                 <!-- products & cart side by side -->
                 <div class="shop-grid-cart">
@@ -84,6 +107,32 @@
                             WhatsApp</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="shop-bundles-section reveal">
+        <div class="container">
+            <h2 class="section-title">Recommended Starter Bundles</h2>
+            <div class="bundles-grid">
+                <article class="bundle-card">
+                    <h3>Beginner Safety Pack</h3>
+                    <p>Helmet, knee pads, elbow pads, and wrist guards for first-time skaters.</p>
+                    <p class="bundle-price">$129</p>
+                    <a href="contact.html" class="btn btn-secondary">Reserve Bundle</a>
+                </article>
+                <article class="bundle-card">
+                    <h3>Street Flow Kit</h3>
+                    <p>Urban roller skates, spare wheel set, and bearing maintenance kit.</p>
+                    <p class="bundle-price">$349</p>
+                    <a href="contact.html" class="btn btn-secondary">Reserve Bundle</a>
+                </article>
+                <article class="bundle-card">
+                    <h3>Competition Ready Set</h3>
+                    <p>Performance boots, speed wheels, and premium protective gear setup.</p>
+                    <p class="bundle-price">$499</p>
+                    <a href="contact.html" class="btn btn-secondary">Reserve Bundle</a>
+                </article>
             </div>
         </div>
     </section>
@@ -132,7 +181,6 @@
     </a>
 
     <script>
-        // Shop products data
         const products = [
             { id: 1, name: "Professional Roller Skates", price: 299, category: "boots", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format", description: "High-performance skates with precision bearings and durable boots." },
             { id: 2, name: "Speed Wheels Set", price: 89, category: "wheels", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&auto=format", description: "Premium aluminum wheels for maximum speed and control." },
@@ -144,58 +192,103 @@
             { id: 8, name: "Bearing Maintenance Kit", price: 25, category: "accessories", image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&auto=format", description: "Complete kit for cleaning and lubricating bearings." }
         ];
 
+        const CART_KEY = 'edgeSkateCart';
         let cart = [];
+        let activeFilter = 'all';
+        let searchTerm = '';
+        let sortMode = 'featured';
 
-        // Initialize shop
-        function initShop() {
-            displayProducts('all');
-            updateCartDisplay();
+        function loadCart() {
+            try {
+                const parsed = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+                cart = Array.isArray(parsed) ? parsed : [];
+            } catch (error) {
+                cart = [];
+            }
         }
 
-        // Display products
-        function displayProducts(filter) {
+        function saveCart() {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        }
+
+        function updateNavCartCount() {
+            const count = cart.reduce((total, item) => total + Number(item.quantity || 0), 0);
+            const badge = document.querySelector('.nav-cart-count');
+            if (badge) badge.textContent = String(count);
+        }
+
+        function getVisibleProducts() {
+            let visible = products.filter(product => activeFilter === 'all' || product.category === activeFilter);
+
+            if (searchTerm) {
+                visible = visible.filter(product =>
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (sortMode === 'price-low') {
+                visible.sort((a, b) => a.price - b.price);
+            } else if (sortMode === 'price-high') {
+                visible.sort((a, b) => b.price - a.price);
+            } else if (sortMode === 'name-asc') {
+                visible.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            return visible;
+        }
+
+        function displayProducts() {
             const productsGrid = document.getElementById('productsGrid');
+            if (!productsGrid) return;
+
+            const visibleProducts = getVisibleProducts();
             productsGrid.innerHTML = '';
 
-            const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+            if (visibleProducts.length === 0) {
+                productsGrid.innerHTML = '<p class="cart-empty-message">No matching products found. Try a different filter or search term.</p>';
+                return;
+            }
 
-            filteredProducts.forEach(product => {
+            visibleProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" class="product-image">
-          <div class="product-info">
-            <h3 class="product-name">${product.name}</h3>
-            <div class="product-price">$${product.price}</div>
-            <p class="product-description">${product.description}</p>
-            <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
-              <i class="fas fa-cart-plus"></i> Add to Cart
-            </button>
-          </div>
-        `;
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">$${product.price}</div>
+                        <p class="product-description">${product.description}</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
                 productsGrid.appendChild(productCard);
             });
         }
 
-        // Add to cart
         function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
+            const product = products.find(item => item.id === productId);
+            if (!product) return;
 
+            const existingItem = cart.find(item => item.id === productId);
             if (existingItem) {
-                existingItem.quantity++;
+                existingItem.quantity += 1;
             } else {
                 cart.push({ ...product, quantity: 1 });
             }
 
+            saveCart();
             updateCartDisplay();
+            updateNavCartCount();
             showNotification(`${product.name} added to cart!`);
         }
 
-        // Update cart display
         function updateCartDisplay() {
             const cartItemsContainer = document.getElementById('cartItemsContainer');
             const cartTotal = document.getElementById('cartTotal');
+            if (!cartItemsContainer || !cartTotal) return;
 
             cartItemsContainer.innerHTML = '';
 
@@ -206,41 +299,61 @@
             }
 
             let total = 0;
-
             cart.forEach(item => {
                 total += item.price * item.quantity;
 
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
                 cartItem.innerHTML = `
-          <div class="cart-item-info">
-            <h4>${item.name}</h4>
-            <span>$${item.price} each</span>
-          </div>
-          <div class="cart-item-controls">
-            <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
-            <span class="cart-item-quantity">${item.quantity}</span>
-            <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
-          </div>
-        `;
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <span>$${item.price} each</span>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                        <span class="cart-item-quantity">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                    </div>
+                `;
                 cartItemsContainer.appendChild(cartItem);
             });
 
             cartTotal.textContent = `Total: $${total.toFixed(2)}`;
         }
 
-        // Update quantity
         function updateQuantity(productId, newQuantity) {
             if (newQuantity <= 0) {
                 cart = cart.filter(item => item.id !== productId);
             } else {
-                const item = cart.find(item => item.id === productId);
+                const item = cart.find(entry => entry.id === productId);
                 if (item) item.quantity = newQuantity;
             }
+            saveCart();
             updateCartDisplay();
+            updateNavCartCount();
         }
 
-        // Checkout via WhatsApp
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--accent-blue);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: var(--shadow-hover);
+                z-index: 1001;
+            `;
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 2500);
+        }
+
         document.getElementById('checkoutWA').addEventListener('click', function () {
             if (cart.length === 0) {
                 showNotification('Your cart is empty!');
@@ -249,95 +362,84 @@
 
             let message = 'Hi Edge Skating Club! I would like to order:\\n\\n';
             let total = 0;
-
             cart.forEach(item => {
                 message += `${item.name} x${item.quantity} - $${item.price * item.quantity}\\n`;
                 total += item.price * item.quantity;
             });
 
             message += `\\nTotal: $${total.toFixed(2)}\\n\\nPlease confirm my order!`;
-
             const whatsappUrl = `https://wa.me/256123456789?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         });
 
-        // Filter buttons
-        document.getElementById('filterContainer').addEventListener('click', function (e) {
-            if (e.target.classList.contains('filter-btn')) {
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-                displayProducts(e.target.dataset.filter);
-            }
+        document.getElementById('filterContainer').addEventListener('click', function (event) {
+            if (!event.target.classList.contains('filter-btn')) return;
+
+            activeFilter = event.target.dataset.filter;
+            document.querySelectorAll('.filter-btn').forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+            displayProducts();
         });
 
-        // Notification function
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: var(--accent-blue);
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        box-shadow: var(--shadow-hover);
-        z-index: 1001;
-        animation: slideIn 0.3s ease;
-      `;
-            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
-
-            document.body.appendChild(notification);
-
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+        const shopSearch = document.getElementById('shopSearch');
+        if (shopSearch) {
+            shopSearch.addEventListener('input', function () {
+                searchTerm = this.value.trim().toLowerCase();
+                displayProducts();
+            });
         }
 
-        // Navbar scroll effect
+        const shopSort = document.getElementById('shopSort');
+        if (shopSort) {
+            shopSort.addEventListener('change', function () {
+                sortMode = this.value;
+                displayProducts();
+            });
+        }
+
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            if (navbar) {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
             }
         });
 
-        // Reveal animations
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-
                 if (elementTop < windowHeight - 100) {
                     element.classList.add('active');
                 }
             });
         }
 
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', () => {
-            initShop();
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', function () {
+                navLinks.classList.toggle('show');
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    navLinks.classList.remove('show');
+                });
+            });
+        }
+
+        window.addEventListener('load', function () {
+            loadCart();
+            displayProducts();
+            updateCartDisplay();
+            updateNavCartCount();
             revealOnScroll();
         });
-
-        // Mobile menu toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function () {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'white';
-            navLinks.style.padding = '1rem';
-            navLinks.style.boxShadow = 'var(--shadow-sm)';
-        });
+        window.addEventListener('scroll', revealOnScroll);
     </script>
 
 </body>
 </html>
+
+

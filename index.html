@@ -25,8 +25,8 @@
 
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Poppins modern sports style -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    <!-- Google Fonts: Manrope modern sports style -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Favicon -->
@@ -37,116 +37,86 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
-    <!-- STICKY NAVBAR -->
+<body class="home-makai-page">
     <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-skating"></i>
-                Edge Skating Club
+        <div class="nav-top">
+            <div class="container nav-top-inner">
+                <a href="index.html" class="nav-brand">
+                    <span class="nav-brand-icon"><i class="fas fa-cog"></i></span>
+                    <span class="nav-brand-text">
+                        <span class="nav-brand-title">fortroller Skating Club</span>
+                        <span class="nav-brand-sub">Urban Sports Co.</span>
+                    </span>
+                </a>
+                <a href="contact.html" class="nav-touch-btn">Get in touch</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+        </div>
+        <div class="nav-main">
+            <div class="container nav-main-inner">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="gallery.html">Our Work <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="events.html">Opportunities <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="blogs.html">Blog Posts</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- HERO SLIDER -->
-    <section class="hero-slider" id="heroSlider">
-        <!-- Slide 1: Skating image (existing) -->
-        <div class="hero-slide hero-slide-1 active">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Professional Skate Training in Fort Portal</h1>
-                    <p>Join Uganda's premier skating club. From beginner to competitive level, we provide expert
-                        coaching, premium gear, and a supportive community.</p>
-                    <div class="hero-buttons">
-                        <a href="contact.html" class="btn btn-primary">Join Now</a>
-                        <a href="team.html" class="btn btn-secondary">Meet Our Team</a>
-                    </div>
-                </div>
-            </div>
+    <section class="home-makai-hero" id="home">
+        <div class="home-makai-pattern"></div>
+        <div class="container home-makai-hero-copy">
+            <h1>
+                Professional <span class="accent">Skate Training</span> and Premium Gear
+                <span class="accent">For Fort Portal</span>.
+            </h1>
+            <p>Join Uganda's premier skating club. From beginner to competitive level, we provide expert coaching,
+                premium gear, and a supportive community.</p>
         </div>
-
-        <!-- Slide 2: Blue gradient (no image) -->
-        <div class="hero-slide hero-slide-2">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Premium Skate Gear & Equipment</h1>
-                    <p>Shop the best skating equipment with expert advice. From beginner skates to professional gear, we
-                        have everything you need.</p>
-                    <div class="hero-buttons">
-                        <a href="shop.html" class="btn btn-primary">Shop Now</a>
-                        <a href="gallery.html" class="btn btn-secondary">View Gallery</a>
-                    </div>
-                </div>
-            </div>
+        <div class="home-makai-hero-image">
+            <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=1600&auto=format"
+                alt="Group skating session outdoors">
         </div>
-
-        <!-- Slide 3: Another skating image -->
-        <div class="hero-slide hero-slide-3">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Community Events & Competitions</h1>
-                    <p>Participate in exciting skating events, workshops, and championships. Build skills, make friends,
-                        and compete at the highest level.</p>
-                    <div class="hero-buttons">
-                        <a href="events.html" class="btn btn-primary">View Events</a>
-                        <a href="blogs.html" class="btn btn-secondary">Read Blog</a>
-                    </div>
-                </div>
+        <div class="home-makai-metrics container">
+            <div class="home-makai-metric">
+                <strong class="count-up" data-target="500" data-suffix="+">0</strong>
+                <span>Active Members</span>
             </div>
-        </div>
-
-        <!-- Hero dots -->
-        <div class="hero-dots">
-            <div class="hero-dot active" data-slide="0"></div>
-            <div class="hero-dot" data-slide="1"></div>
-            <div class="hero-dot" data-slide="2"></div>
+            <div class="home-makai-metric">
+                <strong class="count-up" data-target="50" data-suffix="+">0</strong>
+                <span>Competitions Won</span>
+            </div>
         </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="about-section reveal" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Edge Skating Club</h2>
-                    <p>Founded in 2018, Edge Skating Club has become Fort Portal's premier destination for roller
-                        skating training and community. Our mission is to make skating accessible to everyone, from
-                        complete beginners to competitive athletes.</p>
-                    <p>We offer professional coaching, premium equipment, and a supportive environment where skaters of
-                        all ages and skill levels can thrive. Our experienced coaches bring years of competitive
-                        experience and a passion for teaching.</p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Active Members</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">20+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Competitions Won</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=600&auto=format"
-                        alt="Skating training session">
-                </div>
+    <section class="home-makai-about reveal" id="about">
+        <div class="container home-makai-about-grid">
+            <div class="home-makai-about-copy">
+                <p class="home-makai-eyebrow">About Edge Skating Club</p>
+                <h2>Pioneering Skate Training and Community Growth in Fort Portal</h2>
+                <p>Founded in 2018, Edge Skating Club has become Fort Portal's premier destination for roller skating
+                    training and community. Our mission is to make skating accessible to everyone, from complete
+                    beginners to competitive athletes.</p>
+                <p>We offer professional coaching, premium equipment, and a supportive environment where skaters of all
+                    ages and skill levels can thrive. Our experienced coaches bring years of competitive experience and
+                    a passion for teaching.</p>
             </div>
+            <aside class="home-makai-about-card">
+                <div class="home-makai-about-item">
+                    <h3><i class="fas fa-eye"></i> Vision</h3>
+                    <p>To build a strong skating community where every beginner and athlete has access to expert
+                        guidance, quality equipment, and opportunities to grow.</p>
+                </div>
+                <div class="home-makai-about-item">
+                    <h3><i class="fas fa-bullseye"></i> Mission</h3>
+                    <p>Make skating accessible to all skill levels through professional coaching, safe training, and a
+                        supportive club environment in Fort Portal.</p>
+                </div>
+            </aside>
         </div>
     </section>
 
@@ -207,6 +177,82 @@
         </div>
     </section>
 
+    <section class="home-schedule-section reveal" id="schedule">
+        <div class="container">
+            <h2 class="section-title">Weekly Training Schedule</h2>
+            <p class="section-lead">Structured sessions for every level, from first-timers to competitive skaters.</p>
+            <div class="schedule-grid">
+                <article class="schedule-card">
+                    <h3>Monday - Fundamentals</h3>
+                    <ul class="schedule-list">
+                        <li><span>4:00 PM</span> Kids Balance & Safety Drills</li>
+                        <li><span>5:30 PM</span> Beginner Bootcamp</li>
+                        <li><span>7:00 PM</span> Adult Starter Class</li>
+                    </ul>
+                </article>
+                <article class="schedule-card">
+                    <h3>Wednesday - Skills & Speed</h3>
+                    <ul class="schedule-list">
+                        <li><span>4:30 PM</span> Technique Refinement</li>
+                        <li><span>6:00 PM</span> Speed & Agility Circuit</li>
+                        <li><span>7:30 PM</span> Endurance Laps</li>
+                    </ul>
+                </article>
+                <article class="schedule-card">
+                    <h3>Saturday - Community Session</h3>
+                    <ul class="schedule-list">
+                        <li><span>9:00 AM</span> Family Skate Morning</li>
+                        <li><span>11:00 AM</span> Freestyle & Tricks Lab</li>
+                        <li><span>2:00 PM</span> Team Practice & Scrimmage</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-plans-section reveal" id="plans">
+        <div class="container">
+            <h2 class="section-title">Membership Plans</h2>
+            <p class="section-lead">Choose a plan that matches your skating goals and weekly routine.</p>
+            <div class="plans-grid">
+                <article class="plan-card">
+                    <p class="plan-name">Starter</p>
+                    <p class="plan-price">$39<span>/month</span></p>
+                    <ul class="plan-features">
+                        <li>2 coached sessions weekly</li>
+                        <li>Safety assessment</li>
+                        <li>Community skate access</li>
+                        <li>10% gear discount</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-secondary">Get Started</a>
+                </article>
+                <article class="plan-card plan-popular">
+                    <p class="plan-badge">Most Popular</p>
+                    <p class="plan-name">Performance</p>
+                    <p class="plan-price">$69<span>/month</span></p>
+                    <ul class="plan-features">
+                        <li>4 coached sessions weekly</li>
+                        <li>Personal skill review</li>
+                        <li>Priority event registration</li>
+                        <li>15% gear discount</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-primary">Choose Performance</a>
+                </article>
+                <article class="plan-card">
+                    <p class="plan-name">Elite</p>
+                    <p class="plan-price">$109<span>/month</span></p>
+                    <ul class="plan-features">
+                        <li>Unlimited club sessions</li>
+                        <li>1-on-1 coaching support</li>
+                        <li>Competition prep plan</li>
+                        <li>20% gear discount</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn-secondary">Go Elite</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS SECTION -->
     <section class="testimonials-section reveal" id="testimonials">
         <div class="container">
@@ -247,6 +293,67 @@
                             <span>Competitive Skater</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-faq-section reveal" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button" aria-expanded="false">
+                        <span>Do I need my own skates to join?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>No. We offer rental skates and protective gear for beginners so you can start safely before
+                            buying your own setup.</p>
+                    </div>
+                </article>
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button" aria-expanded="false">
+                        <span>What age can children start training?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Our kids program starts at age 4 with balance-first training, playful drills, and strict
+                            coach supervision.</p>
+                    </div>
+                </article>
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button" aria-expanded="false">
+                        <span>How long until I can skate confidently?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Most beginners gain confidence in 4 to 6 weeks with consistent attendance and safety-focused
+                            practice.</p>
+                    </div>
+                </article>
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button" aria-expanded="false">
+                        <span>Can the club help with competition preparation?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Yes. We run competition prep blocks covering race strategy, starts, endurance, and mental
+                            readiness for event day.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-cta-section reveal">
+        <div class="container">
+            <div class="home-cta-card">
+                <h2>Ready To Start Your Skating Journey?</h2>
+                <p>Book a free trial session this week and get a personalized progression plan from our coaches.</p>
+                <div class="home-cta-actions">
+                    <a href="contact.html" class="btn btn-primary">Book Free Trial</a>
+                    <a href="events.html" class="btn btn-secondary">See Upcoming Events</a>
                 </div>
             </div>
         </div>
@@ -300,4 +407,6 @@
 </body>
 
 </html>
+
+
 
