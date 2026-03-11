@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Edge Skating Club | Premium Skate Gear & Equipment</title>
+    <meta name="description"
+        content="Shop premium skating gear, roller skates, protective equipment, and accessories at Edge Skating Club. Quality products for all skill levels.">
+    <meta name="keywords"
+        content="skate shop, roller skates, skating gear, protective equipment, skate accessories, Fort Portal">
+    <meta property="og:title" content="Shop | Edge Skating Club | Premium Skate Gear">
+    <meta property="og:description" content="Shop premium skating gear and equipment at Edge Skating Club.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200">
+    <link rel="canonical" href="https://edgeskatingclub.com/shop">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins modern sports style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏂</text></svg>">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- STICKY NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-skating"></i>
+                Edge Skating Club
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- SHOP + CART SECTION -->
+    <section id="shop" class="bg-light reveal shop-section">
+        <div class="container">
+            <h2 class="section-title">Skating Shop</h2>
+            <div class="shop-container">
+                <!-- filter buttons -->
+                <div class="filter-btns" id="filterContainer">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="boots">Boots</button>
+                    <button class="filter-btn" data-filter="helmets">Helmets</button>
+                    <button class="filter-btn" data-filter="protective">Protective</button>
+                    <button class="filter-btn" data-filter="wheels">Wheels</button>
+                    <button class="filter-btn" data-filter="accessories">Accessories</button>
+                </div>
+
+                <!-- products & cart side by side -->
+                <div class="shop-grid-cart">
+                    <div class="products-grid" id="productsGrid"></div>
+
+                    <!-- cart summary with checkout button -->
+                    <div class="cart-summary" id="cartSummary">
+                        <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+                        <div id="cartItemsContainer"></div>
+                        <div class="cart-total" id="cartTotal">Total: $0.00</div>
+                        <button class="checkout-wa-btn" id="checkoutWA"><i class="fab fa-whatsapp"></i> Checkout via
+                            WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Edge Skating Club</h3>
+                    <p>Uganda's premier skating destination in Fort Portal. Professional training, premium gear, and
+                        community events for all skill levels.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="shop.html">Shop</a></p>
+                    <p><a href="team.html">Our Team</a></p>
+                    <p><a href="gallery.html">Gallery</a></p>
+                    <p><a href="events.html">Events</a></p>
+                    <p><a href="contact.html">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Fort Portal, Uganda</p>
+                    <p><i class="fas fa-phone"></i> +256 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@edgeskatingclub.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Edge Skating Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/256123456789?text=Hi%20Edge%20Skating%20Club!%20I'm%20interested%20in%20your%20skating%20services."
+        class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Shop products data
+        const products = [
+            { id: 1, name: "Professional Roller Skates", price: 299, category: "boots", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format", description: "High-performance skates with precision bearings and durable boots." },
+            { id: 2, name: "Speed Wheels Set", price: 89, category: "wheels", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&auto=format", description: "Premium aluminum wheels for maximum speed and control." },
+            { id: 3, name: "Protective Helmet", price: 79, category: "helmets", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&auto=format", description: "Lightweight helmet with advanced ventilation and safety features." },
+            { id: 4, name: "Knee Pads", price: 45, category: "protective", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&auto=format", description: "Comfortable knee protection with adjustable straps." },
+            { id: 5, name: "Elbow Guards", price: 35, category: "protective", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&auto=format", description: "Flexible elbow pads for complete upper body protection." },
+            { id: 6, name: "Wrist Guards", price: 29, category: "protective", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&auto=format", description: "Essential wrist protection for safe skating." },
+            { id: 7, name: "Skate Bag", price: 65, category: "accessories", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&auto=format", description: "Durable skate bag with multiple compartments." },
+            { id: 8, name: "Bearing Maintenance Kit", price: 25, category: "accessories", image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&auto=format", description: "Complete kit for cleaning and lubricating bearings." }
+        ];
+
+        let cart = [];
+
+        // Initialize shop
+        function initShop() {
+            displayProducts('all');
+            updateCartDisplay();
+        }
+
+        // Display products
+        function displayProducts(filter) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+
+            const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-image">
+          <div class="product-info">
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-price">$${product.price}</div>
+            <p class="product-description">${product.description}</p>
+            <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+          </div>
+        `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartDisplay();
+            showNotification(`${product.name} added to cart!`);
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartTotal = document.getElementById('cartTotal');
+
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="cart-empty-message">Your cart is empty</p>';
+                cartTotal.textContent = 'Total: $0.00';
+                return;
+            }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <span>$${item.price} each</span>
+          </div>
+          <div class="cart-item-controls">
+            <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+            <span class="cart-item-quantity">${item.quantity}</span>
+            <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+          </div>
+        `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // Update quantity
+        function updateQuantity(productId, newQuantity) {
+            if (newQuantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            } else {
+                const item = cart.find(item => item.id === productId);
+                if (item) item.quantity = newQuantity;
+            }
+            updateCartDisplay();
+        }
+
+        // Checkout via WhatsApp
+        document.getElementById('checkoutWA').addEventListener('click', function () {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+
+            let message = 'Hi Edge Skating Club! I would like to order:\\n\\n';
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `${item.name} x${item.quantity} - $${item.price * item.quantity}\\n`;
+                total += item.price * item.quantity;
+            });
+
+            message += `\\nTotal: $${total.toFixed(2)}\\n\\nPlease confirm my order!`;
+
+            const whatsappUrl = `https://wa.me/256123456789?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Filter buttons
+        document.getElementById('filterContainer').addEventListener('click', function (e) {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                displayProducts(e.target.dataset.filter);
+            }
+        });
+
+        // Notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: var(--accent-blue);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow-hover);
+        z-index: 1001;
+        animation: slideIn 0.3s ease;
+      `;
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal animations
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', () => {
+            initShop();
+            revealOnScroll();
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = 'var(--shadow-sm)';
+        });
+    </script>
+
+</body>
+</html>

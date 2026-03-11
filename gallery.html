@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Edge Skating Club | Photos & Moments from Our Skating Community</title>
+    <meta name="description"
+        content="Explore our skating gallery featuring training sessions, competitions, and community moments at Edge Skating Club in Fort Portal.">
+    <meta name="keywords" content="skating gallery, photos, training sessions, competitions, Fort Portal skating">
+    <meta property="og:title" content="Gallery | Edge Skating Club | Skating Photos & Moments">
+    <meta property="og:description"
+        content="Explore our gallery of skating training sessions, competitions, and community moments.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?w=1200">
+    <link rel="canonical" href="https://edgeskatingclub.com/gallery">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins modern sports style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏂</text></svg>">
+    <style>
+        /* ---------- RESET & VARIABLES ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-navy: #0d264a;
+            --primary-blue: #1b3b6b;
+            --accent-blue: #2f6fed;
+            --light-blue: #e8f1ff;
+            --soft-gray: #f5f7fa;
+            --dark-gray: #2d3748;
+            --white: #ffffff;
+            --highlight-orange: #ff7a18;
+            --shadow-sm: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 20px 35px -10px rgba(0, 0, 0, 0.25);
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            background-color: var(--soft-gray);
+            color: var(--dark-gray);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- UTILITY CLASSES ---------- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--highlight-orange);
+            border-radius: 4px;
+        }
+
+        /* ---------- NAVIGATION ---------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+        }
+
+        /* ---------- GALLERY STYLES ---------- */
+        .bg-light {
+            background: var(--white);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* ---------- INSTAGRAM FEED ---------- */
+        .instagram-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .instagram-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .instagram-stats .stat {
+            text-align: center;
+        }
+
+        .instagram-stats .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        .instagram-stats .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .instagram-post {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .instagram-post:hover {
+            transform: scale(1.02);
+        }
+
+        .instagram-post img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-post:hover img {
+            transform: scale(1.1);
+        }
+
+        .instagram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .instagram-post:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        .instagram-overlay .instagram-stats {
+            display: flex;
+            gap: 2rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .instagram-overlay .instagram-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            background: var(--primary-navy);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------- RESPONSIVE DESIGN ---------- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .instagram-stats {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- STICKY NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-skating"></i>
+                Edge Skating Club
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section"
+        style="background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-blue) 100%); color: white; padding: 120px 0 80px; text-align: center; margin-top: 80px;">
+        <div class="container">
+            <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem;">Our Gallery</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">Capturing the moments, skills,
+                and spirit of our skating community</p>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="container reveal" style="padding-top: 80px;">
+        <h2 class="section-title">Training Sessions & Competitions</h2>
+        <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?w=600&auto=format"
+                    alt="skating competition"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=600&auto=format"
+                    alt="group training"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1524593689594-aae2f26b75ab?w=600&auto=format"
+                    alt="performance"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1516594799-4e3d9ea3c53c?w=600&auto=format"
+                    alt="kids training"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&auto=format"
+                    alt="advanced training"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                    alt="skate practice"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&auto=format"
+                    alt="speed training"></div>
+            <div class="gallery-item"><img
+                    src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format"
+                    alt="team building"></div>
+        </div>
+    </section>
+
+    <!-- INSTAGRAM FEED SECTION -->
+    <section id="instagram" class="reveal">
+        <div class="container">
+            <div class="instagram-header">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 1rem;">Follow Our Journey</h2>
+                <p style="text-align: center; color: #4a5568; font-size: 1.1rem; margin-bottom: 2rem;">Stay updated with
+                    our latest training sessions, competitions, and skate life moments</p>
+                <div class="instagram-stats">
+                    <div class="stat">
+                        <span class="stat-number">2.5K+</span>
+                        <span class="stat-label">Followers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Posts</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Competitions</span>
+                    </div>
+                </div>
+                <a href="#"
+                    style="display: inline-block; background: var(--accent-blue); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 2rem; transition: var(--transition);"
+                    onmouseover="this.style.background='var(--primary-blue)'"
+                    onmouseout="this.style.background='var(--accent-blue)'">
+                    <i class="fab fa-instagram"></i> Follow Us on Instagram
+                </a>
+            </div>
+            <div class="instagram-grid">
+                <div class="instagram-post">
+                    <img src="https://images.unsplash.com/photo-1547447134-cd3f5c716030?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        alt="Skate training">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span><i class="fas fa-heart"></i> 127</span>
+                            <span><i class="fas fa-comment"></i> 23</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        alt="Competition">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span><i class="fas fa-heart"></i> 89</span>
+                            <span><i class="fas fa-comment"></i> 15</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="https://images.unsplash.com/photo-1524593689594-aae2f26b75ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        alt="Team photo">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span><i class="fas fa-heart"></i> 203</span>
+                            <span><i class="fas fa-comment"></i> 34</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="https://images.unsplash.com/photo-1515523110800-9415d13b84a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        alt="Kids training">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span><i class="fas fa-heart"></i> 156</span>
+                            <span><i class="fas fa-comment"></i> 28</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        alt="Group session">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span><i class="fas fa-heart"></i> 178</span>
+                            <span><i class="fas fa-comment"></i> 31</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="instagram-post">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                        alt="Speed training">
+                    <div class="instagram-overlay">
+                        <div class="instagram-stats">
+                            <span><i class="fas fa-heart"></i> 142</span>
+                            <span><i class="fas fa-comment"></i> 19</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Edge Skating Club</h3>
+                    <p>Uganda's premier skating destination in Fort Portal. Professional training, premium gear, and
+                        community events for all skill levels.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="shop.html">Shop</a></p>
+                    <p><a href="team.html">Our Team</a></p>
+                    <p><a href="gallery.html">Gallery</a></p>
+                    <p><a href="events.html">Events</a></p>
+                    <p><a href="contact.html">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Fort Portal, Uganda</p>
+                    <p><i class="fas fa-phone"></i> +256 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@edgeskatingclub.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Edge Skating Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/256123456789?text=Hi%20Edge%20Skating%20Club!%20I%20saw%20your%20amazing%20gallery%20and%20want%20to%20learn%20more."
+        class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal animations
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function () {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.padding = '1rem';
+            navLinks.style.boxShadow = 'var(--shadow-sm)';
+        });
+
+        // Gallery lightbox functionality (simple)
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function () {
+                const img = this.querySelector('img');
+                // Simple lightbox - could be enhanced with a proper lightbox library
+                if (confirm('Open image in new tab?')) {
+                    window.open(img.src, '_blank');
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: var(--shadow-hover);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #128c7e;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+    </style>
+</body>
+
+</html>
