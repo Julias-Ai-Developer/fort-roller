@@ -168,6 +168,67 @@ function initBackToTopButton() {
 
 // ========== HERO SLIDER (INDEX.HTML) ==========
 function initHeroSlider() {
+    const splitSlider = document.querySelector('.home-split-slider');
+    if (splitSlider) {
+        let currentSlide = 0;
+        const slides = splitSlider.querySelectorAll('.home-split-slide');
+        const dots = document.querySelectorAll('.home-split-dot');
+        const prevBtn = document.querySelector('.home-split-prev');
+        const nextBtn = document.querySelector('.home-split-next');
+        let autoSlideTimer = null;
+
+        if (!slides.length || !dots.length) return;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function restartAutoSlide() {
+            if (autoSlideTimer) clearInterval(autoSlideTimer);
+            autoSlideTimer = setInterval(nextSlide, 5000);
+        }
+
+        restartAutoSlide();
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                restartAutoSlide();
+            });
+        });
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                restartAutoSlide();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                restartAutoSlide();
+            });
+        }
+
+        return;
+    }
+
     if (!document.querySelector('.hero-slider')) return;
 
     let currentSlide = 0;

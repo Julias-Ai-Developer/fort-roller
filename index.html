@@ -25,8 +25,8 @@
 
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Manrope modern sports style -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+    <!-- Google Fonts: Poppins, Montserrat, Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Favicon -->
@@ -55,9 +55,16 @@
             <div class="container nav-main-inner">
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="gallery.html">Our Work <i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="events.html">Opportunities <i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="team.html">Team</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#">About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="team.html">Team</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="shop.html">Shop</a></li>
                     <li><a href="blogs.html">Blog Posts</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
@@ -67,29 +74,44 @@
         </div>
     </nav>
 
-    <section class="home-makai-hero" id="home">
-        <div class="home-makai-pattern"></div>
-        <div class="container home-makai-hero-copy">
-            <h1>
-                Professional <span class="accent">Skate Training</span> and Premium Gear
-                <span class="accent">For Fort Portal</span>.
-            </h1>
-            <p>Join Uganda's premier skating club. From beginner to competitive level, we provide expert coaching,
-                premium gear, and a supportive community.</p>
+    <section class="home-split-hero" id="home">
+        <div class="home-split-slider">
+            <article class="home-split-slide home-split-slide-one active">
+                <div class="home-split-inner">
+                    <div class="home-split-copy">
+                        <h1>Professional Skate Training and Premium Gear For Fort Portal.</h1>
+                        <p>Join Uganda's premier skating club. From beginner to competitive level, we provide expert
+                            coaching, premium gear, and a supportive community.</p>
+                        <div class="home-split-actions">
+                            <a href="contact.html" class="home-split-btn home-split-btn-primary">Book Free Trial</a>
+                            <a href="shop.html" class="home-split-btn home-split-btn-ghost">Shop Skates</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="home-split-slide home-split-slide-two">
+                <div class="home-split-inner">
+                    <div class="home-split-copy">
+                        <h1>Build Confidence, Speed and Control With Expert Coaching.</h1>
+                        <p>Train with our experienced team and enjoy structured sessions designed for kids, teens, and
+                            adults at every skill level.</p>
+                        <div class="home-split-actions">
+                            <a href="events.html" class="home-split-btn home-split-btn-primary">See Events</a>
+                            <a href="gallery.html" class="home-split-btn home-split-btn-ghost">View Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
-        <div class="home-makai-hero-image">
-            <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=1600&auto=format"
-                alt="Group skating session outdoors">
+        <div class="home-split-nav" aria-label="Slider controls">
+            <button class="home-split-arrow home-split-prev" type="button" aria-label="Previous slide"><i
+                    class="fas fa-chevron-left"></i></button>
+            <button class="home-split-arrow home-split-next" type="button" aria-label="Next slide"><i
+                    class="fas fa-chevron-right"></i></button>
         </div>
-        <div class="home-makai-metrics container">
-            <div class="home-makai-metric">
-                <strong class="count-up" data-target="500" data-suffix="+">0</strong>
-                <span>Active Members</span>
-            </div>
-            <div class="home-makai-metric">
-                <strong class="count-up" data-target="50" data-suffix="+">0</strong>
-                <span>Competitions Won</span>
-            </div>
+        <div class="home-split-dots" aria-label="Hero slides">
+            <button class="home-split-dot active" type="button" aria-label="Slide 1"></button>
+            <button class="home-split-dot" type="button" aria-label="Slide 2"></button>
         </div>
     </section>
 
@@ -105,16 +127,9 @@
                     ages and skill levels can thrive. Our experienced coaches bring years of competitive experience and
                     a passion for teaching.</p>
             </div>
-            <aside class="home-makai-about-card">
-                <div class="home-makai-about-item">
-                    <h3><i class="fas fa-eye"></i> Vision</h3>
-                    <p>To build a strong skating community where every beginner and athlete has access to expert
-                        guidance, quality equipment, and opportunities to grow.</p>
-                </div>
-                <div class="home-makai-about-item">
-                    <h3><i class="fas fa-bullseye"></i> Mission</h3>
-                    <p>Make skating accessible to all skill levels through professional coaching, safe training, and a
-                        supportive club environment in Fort Portal.</p>
+            <aside class="home-makai-about-media">
+                <div class="home-makai-irregular-circle">
+                    <img src="assets/images/skatters%20%283%29.jpg" alt="Skating athlete in motion">
                 </div>
             </aside>
         </div>
@@ -407,6 +422,4 @@
 </body>
 
 </html>
-
-
 
