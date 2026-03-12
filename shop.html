@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop | Edge Skating Club | Premium Skate Gear & Equipment</title>
+    <title>Shop | Fortroller Skating Club | Premium Skate Gear & Equipment</title>
     <meta name="description"
-        content="Shop premium skating gear, roller skates, protective equipment, and accessories at Edge Skating Club. Quality products for all skill levels.">
+        content="Shop premium skating gear, roller skates, protective equipment, and accessories at Fortroller Skating Club. Quality products for all skill levels.">
     <meta name="keywords"
         content="skate shop, roller skates, skating gear, protective equipment, skate accessories, Fort Portal">
-    <meta property="og:title" content="Shop | Edge Skating Club | Premium Skate Gear">
-    <meta property="og:description" content="Shop premium skating gear and equipment at Edge Skating Club.">
+    <meta property="og:title" content="Shop | Fortroller Skating Club | Premium Skate Gear">
+    <meta property="og:description" content="Shop premium skating gear and equipment at Fortroller Skating Club.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200">
-    <link rel="canonical" href="https://edgeskatingclub.com/shop">
+    <link rel="canonical" href="https://fortrollerskatingclub.com/shop">
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,13 +35,13 @@
 
 <body>
     <!-- STICKY NAVBAR -->
-    <nav class="navbar" id="navbar">
+            <nav class="navbar" id="navbar">
         <div class="nav-top">
             <div class="container nav-top-inner">
                 <a href="index.html" class="nav-brand">
                     <span class="nav-brand-icon"><i class="fas fa-cog"></i></span>
                     <span class="nav-brand-text">
-                        <span class="nav-brand-title">fortroller Skating Club</span>
+                        <span class="nav-brand-title">Fortroller Skating Club</span>
                         <span class="nav-brand-sub">Urban Sports Co.</span>
                     </span>
                 </a>
@@ -50,11 +50,18 @@
         </div>
         <div class="nav-main">
             <div class="container nav-main-inner">
-                                <ul class="nav-links">
+                <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html" class="active">Our Work <i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="events.html">Opportunities <i class="fas fa-chevron-down"></i></a></li>
+                    <li class="nav-dropdown">
+                        <a href="#">About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="team.html">Team</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="contact.html">Contact</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
                     <li><a href="blogs.html">Blog Posts</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
@@ -142,7 +149,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Edge Skating Club</h3>
+                    <h3>Fortroller Skating Club</h3>
                     <p>Uganda's premier skating destination in Fort Portal. Professional training, premium gear, and
                         community events for all skill levels.</p>
                     <div class="social-links">
@@ -165,17 +172,17 @@
                     <h3>Contact Info</h3>
                     <p><i class="fas fa-map-marker-alt"></i> Fort Portal, Uganda</p>
                     <p><i class="fas fa-phone"></i> +256 123 456 789</p>
-                    <p><i class="fas fa-envelope"></i> info@edgeskatingclub.com</p>
+                    <p><i class="fas fa-envelope"></i> info@fortrollerskatingclub.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Edge Skating Club. All rights reserved.</p>
+                <p>&copy; 2025 Fortroller Skating Club. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/256123456789?text=Hi%20Edge%20Skating%20Club!%20I'm%20interested%20in%20your%20skating%20services."
+    <a href="https://wa.me/256123456789?text=Hi%20Fortroller%20Skating%20Club!%20I'm%20interested%20in%20your%20skating%20services."
         class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
@@ -360,7 +367,7 @@
                 return;
             }
 
-            let message = 'Hi Edge Skating Club! I would like to order:\\n\\n';
+            let message = 'Hi Fortroller Skating Club! I would like to order:\\n\\n';
             let total = 0;
             cart.forEach(item => {
                 message += `${item.name} x${item.quantity} - $${item.price * item.quantity}\\n`;
@@ -441,6 +448,9 @@
 
 </body>
 </html>
+
+
+
 
 
 
